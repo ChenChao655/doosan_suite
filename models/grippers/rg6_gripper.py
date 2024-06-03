@@ -3,9 +3,8 @@ Gripper for Franka's Panda (has two fingers).
 """
 import os
 import numpy as np
-
 from robosuite.models.grippers.gripper_model import GripperModel
-from envs.suite.models import assets_root
+from ... import assets_root
 
 
 class Rg6Gripper(GripperModel):

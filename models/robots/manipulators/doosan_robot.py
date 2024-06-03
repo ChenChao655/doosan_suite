@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from robosuite.models.robots.manipulators.manipulator_model import ManipulatorModel
-from envs.suite.models import assets_root
+from ... import assets_root
 
 
 class Doosan(ManipulatorModel):
