@@ -1,0 +1,88 @@
+<mujoco model="rg2">
+    <default>
+        <default class="Gripper">
+            <geom margin="0.001" solimp="0.99 0.99 0.01" solref="0.01 1" type="mesh"></geom>
+            <joint armature="1" damping="50" frictionloss="0" stiffness="0"></joint>
+        </default>
+    </default>
+
+    <asset>
+        <mesh file="visual/base.stl"/>
+        <mesh file="visual/finger1_finger.stl"/>
+        <mesh file="visual/finger1_inner_knuckle.stl"/>
+        <mesh file="visual/finger1_finger_tip.stl"/>
+        <mesh file="visual/finger2_finger.stl"/>
+        <mesh file="visual/finger2_inner_knuckle.stl"/>
+        <mesh file="visual/finger2_finger_tip.stl"/>
+    </asset>
+
+    <worldbody>
+        <body name="gripper_base" childclass="Gripper">
+            <geom type="mesh" rgba="1 1 1 1" mesh="base" quat="0.707107 0 0 -0.707107"/>
+            <body name="gripper_finger1_finger_link" pos="-0.0103 -0.0169 0.105" quat="0.707107 0 0 -0.707107">
+                <inertial pos="0.00107181 0.0103 0.00719447" quat="0.706909 0.0167049 0.0167049 0.706909" mass="0.0157597" diaginertia="4.86544e-06 4.78708e-06 1.3053e-06" />
+                <joint name="robot:gripper_finger1_joint" pos="0 0 0" axis="0 1 0" limited="true" range="0 1.2" />
+                <geom type="mesh" mesh="finger1_finger" rgba="1 1 1 1"/>
+            </body>
+            <body name="gripper_finger1_inner_knuckle_link" pos="-0.01 -0.0074 0.1215" quat="0.707107 0 0 -0.707107">
+                <inertial pos="0.000752726 0.01 0.0203935" quat="0.99984 0 0.0178914 0" mass="0.00491742" diaginertia="1.98342e-06 1.77599e-06 2.46725e-07" />
+                <joint name="gripper_finger1_inner_knuckle_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-3.14 3.14" />
+                <geom type="mesh" mesh="finger1_inner_knuckle" rgba="1 1 1 1"/>
+                <body name="gripper_finger1_finger_tip_link" pos="0.002 0.0042 0.054964">
+                    <inertial pos="-0.00115944 0.0058 0.0107764" quat="0.994371 0 -0.105955 0" mass="0.00872849" diaginertia="1.56496e-06 1.45215e-06 3.016e-07" />
+                    <joint name="gripper_finger1_finger_tip_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-3.14 3.14"/>
+                    <geom type="mesh" mesh="finger1_finger_tip" rgba="1 1 1 1" condim="4" friction="1 1 1"/>
+                </body>
+            </body>
+
+            <body name="gripper_finger2_finger_link" pos="-0.0103 0.0171 0.105" quat="0.707107 0 0 -0.707107">
+                <inertial pos="-0.00107181 0.0103 0.00719447" quat="0.706909 -0.0167049 -0.0167049 0.706909" mass="0.0157597" diaginertia="4.86544e-06 4.78708e-06 1.3053e-06" />
+                <joint name="robot:gripper_finger2_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-1.2 0" />
+                <geom type="mesh" mesh="finger2_finger" rgba="1 1 1 1" />
+            </body>
+            <body name="gripper_finger2_inner_knuckle_link" pos="-0.01 0.0076 0.1215" quat="0.707107 0 0 -0.707107">
+                <inertial pos="-0.000752726 0.01 0.0203935" quat="0.99984 0 -0.0178914 0" mass="0.00491742" diaginertia="1.98342e-06 1.77599e-06 2.46725e-07" />
+                <joint name="gripper_finger2_inner_knuckle_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-3.14 3.14" />
+                <geom type="mesh" mesh="finger2_inner_knuckle" rgba="1 1 1 1" />
+                <body name="gripper_finger2_finger_tip_link" pos="-0.002 0.0042 0.054964">
+                    <inertial pos="0.00115944 0.0058 0.0107764" quat="0.994371 0 0.105955 0" mass="0.00872849" diaginertia="1.56496e-06 1.45215e-06 3.016e-07" />
+                    <joint name="gripper_finger2_finger_tip_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-3.14 3.14"/>
+                    <geom type="mesh" mesh="finger2_finger_tip" rgba="1 1 1 1" condim="4" friction="1 1 1"/>
+                </body>
+            </body>
+            <body name="gripper_end" pos="0 0 0.2" >
+                <site name="gripper_end_site" pos="0 0 0" rgba="1 0 0 0" size="0.02 0.02 0.02"></site>
+            </body>
+        </body>
+    </worldbody>
+
+    <contact>
+        <exclude body1="gripper_base" body2="gripper_finger1_finger_link" />
+        <exclude body1="gripper_base" body2="gripper_finger1_inner_knuckle_link" />
+
+        <exclude body1="gripper_base" body2="gripper_finger2_finger_link" />
+        <exclude body1="gripper_base" body2="gripper_finger2_inner_knuckle_link" />
+
+        <exclude body1="gripper_finger1_finger_link" body2="gripper_finger1_finger_tip_link" />
+        <exclude body1="gripper_finger1_finger_link" body2="gripper_finger1_inner_knuckle_link" />
+        <exclude body1="gripper_finger1_inner_knuckle_link" body2="gripper_finger1_finger_tip_link" />
+
+        <exclude body1="gripper_finger2_finger_link" body2="gripper_finger2_finger_tip_link" />
+        <exclude body1="gripper_finger2_finger_link" body2="gripper_finger2_inner_knuckle_link" />
+        <exclude body1="gripper_finger2_inner_knuckle_link" body2="gripper_finger2_finger_tip_link" />
+    </contact>
+
+    <equality>
+        <joint joint1="robot:gripper_finger1_joint" joint2="gripper_finger1_inner_knuckle_joint"></joint>
+        <joint joint1="robot:gripper_finger1_joint" joint2="gripper_finger1_finger_tip_joint" polycoef="0 -1 0 0 0"></joint>
+
+        <joint joint1="robot:gripper_finger2_joint" joint2="gripper_finger2_inner_knuckle_joint"></joint>
+        <joint joint1="robot:gripper_finger2_joint" joint2="gripper_finger2_finger_tip_joint" polycoef="0 -1 0 0 0"></joint>
+
+        <joint joint1="robot:gripper_finger1_joint" joint2="robot:gripper_finger2_joint" polycoef="0 -1 0 0 0"></joint>
+    </equality>
+
+	<actuator>
+        <position joint="robot:gripper_finger1_joint" kp="3e3" ctrllimited="true" ctrlrange="0 1.2"/>
+    </actuator>
+</mujoco>

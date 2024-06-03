@@ -1,0 +1,96 @@
+<mujoco model="m1509">
+    <actuator>
+        <!-- Physical limits of the actuator. -->
+        <!-- Values taken from https://www.universal-robots.com/articles/ur-articles/max-joint-torques/ -->
+        <motor ctrllimited="true" ctrlrange="-360.0 360.0" joint="doosan_joint1" name="torq_j1"/>
+        <motor ctrllimited="true" ctrlrange="-180.0 180.0" joint="doosan_joint2" name="torq_j2"/>
+        <motor ctrllimited="true" ctrlrange="-135.0 135.0" joint="doosan_joint3" name="torq_j3"/>
+        <motor ctrllimited="true" ctrlrange="-360.0 360.0" joint="doosan_joint4" name="torq_j4"/>
+        <motor ctrllimited="true" ctrlrange="-135.0 135.0" joint="doosan_joint5" name="torq_j5"/>
+        <motor ctrllimited="true" ctrlrange="-360.0 360.0" joint="doosan_joint6" name="torq_j6"/>
+    </actuator>
+    <asset>
+        <mesh name="MF1509_0_0 vis" file="meshes/MF1509_0_0.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_1_0 vis" file="meshes/MF1509_1_0.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_2_0 vis" file="meshes/MF1509_2_0.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_2_1 vis" file="meshes/MF1509_2_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_2_2 vis" file="meshes/MF1509_2_2.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_3_0 vis" file="meshes/MF1509_3_0.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_4_0 vis" file="meshes/MF1509_4_0.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_4_1 vis" file="meshes/MF1509_4_1.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_5_0 vis" file="meshes/MF1509_5_0.stl" scale="0.001 0.001 0.001"/>
+        <mesh name="MF1509_6_0 vis" file="meshes/MF1509_6_0.stl" scale="0.001 0.001 0.001"/>
+    </asset>
+    <worldbody>
+        <body name="doosan_base" quat="1 0 0 0">
+            <!-- robot view -->
+            <camera mode="fixed" name="robotview" pos="1.0 0 0.4" quat="0.653 0.271 0.271 0.653"/>
+            <inertial mass="3.722" pos="0 0 0.050723" fullinertia="0.011 0.011 0.014 -7.19e-06 -1.94e-06 4.9e-06"/>
+            <!-- mount attached here -->
+            <geom rgba="0.49 0.49 0.486 1" mesh="MF1509_0_0 vis" type="mesh" contype="0" conaffinity="0"
+                  group="1"/>
+<!--            <geom type="capsule" pos="0 0 0.14" quat="0 0 0 1" size="0.08 0.06"/>-->
+            <body name="link1" pos="0 0 0.1525">
+                <inertial pos="0.00012 0.0428 -0.00638" quat="0.453204 0.542776 -0.542776 0.453204" mass="7.8" diaginertia="0.39544 0.39 0.22456" />
+                <joint name="doosan_joint1" limited="true" range="-6.28 6.28" damping="0.001"
+                       frictionloss="0.01"/>
+                <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_1_0 vis" type="mesh" contype="0" conaffinity="0"
+                      group="1"/>
+<!--                <geom type="sphere" pos="0 0.2 0" size="0.12"/>-->
+                <body name="link2" pos="0 0.0345 0" quat="0.499898 -0.500102 -0.5 -0.5">
+                    <inertial pos="0.17062 -9e-05 0.15731" quat="0.499973 0.499904 0.499533 0.500589" mass="10.06" diaginertia="0.3209 0.31069 0.0352096" />
+                    <joint name="doosan_joint2" limited="true" range="-6.28 6.28" damping="0.001"
+                           frictionloss="0.01"/>
+                    <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_2_0 vis" type="mesh" contype="0" conaffinity="0"
+                          group="1"/>
+                    <geom rgba="0.49 0.49 0.486 1" mesh="MF1509_2_1 vis" type="mesh" contype="0" conaffinity="0"
+                          group="1"/>
+                    <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_2_2 vis" type="mesh" contype="0" conaffinity="0"
+                          group="1"/>
+<!--                    <geom type="capsule" pos="0.19 0 0.16" quat="0.707 0 0.7070 0" size="0.055 0.1"/>-->
+                    <body name="link3" pos="0.411 0 0" quat="0.707035 0 0 0.707179">
+                        <inertial pos="-3e-05 -0.00672 0.04454" quat="0.668331 0.743864 0 0" mass="3.68" diaginertia="0.0117709 0.0107306 0.0076324" />
+                        <joint name="doosan_joint3" limited="true" range="-6.28 6.28" damping="0.001"
+                               frictionloss="0.01"/>
+                        <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_3_0 vis" type="mesh" contype="0" conaffinity="0"
+                              group="1"/>
+<!--                        <geom type="sphere" pos="0 0 0.17" size="0.10"/>-->
+                        <body name="link4" pos="0 -0.368 0" quat="0.707035 0.707179 0 0">
+                            <inertial pos="-3e-05 0.09715 -0.1096" quat="0.963602 -0.26734 0 0" mass="3.59" diaginertia="0.05187 0.0498421 0.00624791" />
+                            <joint name="doosan_joint4" limited="true" range="-6.28 6.28" damping="0.001"
+                                   frictionloss="0.01"/>
+                            <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_4_0 vis" type="mesh" contype="0"
+                                  conaffinity="0" group="1"/>
+                            <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_4_1 vis" type="mesh" contype="0"
+                                  conaffinity="0" group="1"/>
+<!--                            <geom pos="0 0 -0.35" size="0.055 0.06" type="capsule"/>-->
+<!--                            <geom type="capsule" pos="0 0.1 -0.15" quat="0.924 -0.383 0 0" size="0.04 0.16"/>-->
+                            <body name="link5" pos="0 0 0" quat="0.707035 -0.707179 0 0">
+                                <inertial pos="-0.00015 0.00382 0.03185" quat="0.757676 0.652631 0 0" mass="2.83" diaginertia="0.00804063 0.00685413 0.00494145" />
+                                <joint name="doosan_joint5" limited="true" range="-6.28 6.28" damping="0.001"
+                                       frictionloss="0.01"/>
+                                <geom rgba="0.941 0.941 0.941 1" mesh="MF1509_5_0 vis" type="mesh" contype="0"
+                                      conaffinity="0" group="1"/>
+<!--                                <geom type="capsule" pos="0 0 0.1" size="0.055 0.1"/>-->
+                                <body name="link6" pos="0 -0.121 0" quat="0.707035 0.707179 0 0">
+                                    <inertial pos="-0.00012 -0.00017 -0.0539" mass="1.16" diaginertia="0.003 0.003 0.00110716" />
+                                    <joint name="doosan_joint6" limited="true" range="-6.28319 6.28319" damping="0.001"
+                                           frictionloss="0.01"/>
+                                    <geom rgba="0.49 0.49 0.486 1" mesh="MF1509_6_0 vis" type="mesh" contype="0"
+                                          conaffinity="0" group="1"/>
+<!--                                    <geom type="capsule" pos="0 0 -0.12" size="0.055 0.07"/>-->
+                                    <body name="right_hand" pos="0 0 0" quat="0.707 0 0 0.707">
+                                        <!-- This camera points out from the eef. -->
+                                        <camera mode="fixed" name="eye_in_hand" pos="0.05 0 0" fovy="75"/>
+                                        <!-- To add gripper -->
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+
+    </worldbody>
+</mujoco>

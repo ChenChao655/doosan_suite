@@ -1,0 +1,98 @@
+<mujoco model="rg6 hand">
+    <actuator>
+        <position ctrllimited="true" ctrlrange="-0.628319 0.628319" joint="finger1_joint" kp="1000" name="gripper_finger_joint1" forcelimited="true" forcerange="-20 20"/>
+    </actuator>
+    <asset>
+        <mesh name="base_link vis" file="meshes/rg6_gripper/base_link_vis.stl"/>
+        <mesh name="outer_knuckle vis" file="meshes/rg6_gripper/outer_knuckle_vis.stl"/>
+        <mesh name="inner_knuckle vis" file="meshes/rg6_gripper/inner_knuckle_vis.stl"/>
+        <mesh name="inner_finger vis" file="meshes/rg6_gripper/inner_finger_vis.stl"/>
+
+        <mesh name="base_link" file="meshes/rg6_gripper/base_link.stl"/>
+        <mesh name="outer_knuckle" file="meshes/rg6_gripper/outer_knuckle.stl"/>
+        <mesh name="inner_knuckle" file="meshes/rg6_gripper/inner_knuckle.stl"/>
+        <mesh name="inner_finger" file="meshes/rg6_gripper/inner_finger.stl"/>
+    </asset>
+
+    <worldbody>
+        <body name="gripper_base">
+<!--            <inertial pos="0 0 0.143327" quat="0 0 0 1" mass="1.4" diaginertia="0.0 0.0 0.0"/>-->
+            <site name="ft_frame" pos="0 0 0" size="0.01 0.01 0.01" rgba="1 0 0 1" type="sphere" group="1"/>
+            <!-- This site was added for visualization. -->
+            <body name="eef" pos="0 0 0.097" quat="1 0 0 0">
+                <site name="grip_site" pos="0 0 0" quat="0.707 0 0 -0.707" size="0.01 0.01 0.01" rgba="1 0 0 0.5" type="sphere" group="1"/>
+                <site name="ee_x" pos="0.1 0 0" size="0.005 .1"  quat="0.707105  0 0.707108 0 " rgba="1 0 0 0" type="cylinder" group="1"/>
+                <site name="ee_y" pos="0 0.1 0" size="0.005 .1" quat="0.707105 0.707108 0 0" rgba="0 1 0 0" type="cylinder" group="1"/>
+                <site name="ee_z" pos="0 0 0.1" size="0.005 .1" quat="1 0 0 0" rgba="0 0 1 0" type="cylinder" group="1"/>
+                <!-- This site was added for visualization. -->
+                <site name="grip_site_cylinder" pos="0 0 0" size="0.005 10" rgba="0 1 0 0.3" type="cylinder" group="1"/>
+            </body>
+            <geom rgba="0.8 0.8 0.8 1" mesh="base_link vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+            <geom rgba="0.8 0.8 0.8 1" mesh="base_link" type="mesh"/>
+            <body name="finger1_link" pos="0 -0.024112 0.136813">
+                <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                <joint name="finger1_joint" pos="0 0 0" axis="-1 0 0" limited="true" range="-0.628319 0.628319" />
+                <geom rgba="0.8 0.8 0.8 1" mesh="outer_knuckle vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+                <geom rgba="0.8 0.8 0.8 1" mesh="outer_knuckle" type="mesh" name="finger1_outer_knuckle_collision"/>
+                <body name="finger1_tip_link" pos="0 -0.047335 0.064495">
+                    <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                    <joint name="finger1_tip_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-0.872665 0.872665" />
+                    <geom rgba="0.1 0.1 0.1 1" mesh="inner_finger vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+                    <geom rgba="0.1 0.1 0.1 1" mesh="inner_finger" type="mesh" name="finger1_inner_finger_collision"/>
+                </body>
+            </body>
+            <body name="finger1_inner_knuckle_link" pos="0 -0.01272 0.1595">
+                <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                <joint name="finger1_inner_knuckle_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-0.628319 0.628319" />
+                <geom rgba="0.8 0.8 0.8 1" mesh="inner_knuckle vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+                <geom rgba="0.8 0.8 0.8 1" mesh="inner_knuckle" type="mesh" name="finger1_inner_knuckle_collision"/>
+            </body>
+
+            <body name="finger2_link" pos="0 0.024112 0.136813" quat="0 0 0 1">
+                <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                <joint name="finger2_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-0.628319 0.628319" />
+                <geom rgba="0.8 0.8 0.8 1" mesh="outer_knuckle vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+                <geom rgba="0.8 0.8 0.8 1" mesh="outer_knuckle" type="mesh" name="finger2_outer_knuckle_collision"/>
+                <body name="finger2_tip_link" pos="0 -0.047335 0.064495">
+                    <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                    <joint name="finger2_tip_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-0.872665 0.872665" />
+                    <geom rgba="0.1 0.1 0.1 1" mesh="inner_finger vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+                    <geom rgba="0.1 0.1 0.1 1" mesh="inner_finger" type="mesh" name="finger2_inner_finger_collision"/>
+                </body>
+            </body>
+            <body name="finger2_inner_knuckle_link" pos="0 0.01272 0.1595" quat="0 0 0 -1">
+                <inertial pos="0 0 0" quat="0.820473 0.339851 -0.17592 0.424708" mass="0.05" diaginertia="0.001002 0.000999 0.000999" />
+                <joint name="finger2_inner_knuckle_joint" pos="0 0 0" axis="1 0 0" limited="true" range="-0.628319 0.628319" />
+                <geom rgba="0.8 0.8 0.8 1" mesh="inner_knuckle vis" type="mesh" contype="0" conaffinity="0" group="1"/>
+                <geom rgba="0.8 0.8 0.8 1" mesh="inner_knuckle" type="mesh" name="finger2_inner_knuckle_collision"/>
+            </body>
+        </body>
+    </worldbody>
+    <sensor>
+        <force name="force_ee" site="ft_frame"/>
+        <torque name="torque_ee" site="ft_frame"/>
+    </sensor>
+    <contact>
+        <exclude body1="gripper_base" body2="finger1_link" />
+        <exclude body1="gripper_base" body2="finger1_inner_knuckle_link" />
+
+        <exclude body1="gripper_base" body2="finger2_link" />
+        <exclude body1="gripper_base" body2="finger2_inner_knuckle_link" />
+
+        <exclude body1="finger1_link" body2="finger1_tip_link" />
+        <exclude body1="finger1_link" body2="finger1_inner_knuckle_link" />
+        <exclude body1="finger1_inner_knuckle_link" body2="finger1_tip_link" />
+
+        <exclude body1="finger2_link" body2="finger2_tip_link" />
+        <exclude body1="finger2_link" body2="finger2_inner_knuckle_link" />
+        <exclude body1="finger2_inner_knuckle_link" body2="finger2_tip_link" />
+    </contact>
+
+    <equality>
+        <joint joint1="finger1_joint" joint2="finger1_inner_knuckle_joint" polycoef="0 -1 0 0 0"/>
+        <joint joint1="finger1_joint" joint2="finger1_tip_joint" polycoef="0 1 0 0 0"/>
+        <joint joint1="finger2_joint" joint2="finger2_inner_knuckle_joint"/>
+        <joint joint1="finger2_joint" joint2="finger2_tip_joint" polycoef="0 -1 0 0 0"/>
+        <joint joint1="finger1_joint" joint2="finger2_joint" polycoef="0 -1 0 0 0"/>
+    </equality>
+</mujoco>
