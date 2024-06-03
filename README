@@ -29,4 +29,4 @@ for i in range(1000):
     obs, reward, done, info = env.step(action)  # take action in the environment
     env.render()  # render on display
 ```
-
+  
